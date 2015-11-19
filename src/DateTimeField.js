@@ -25,6 +25,8 @@ export default class DateTimeField extends Component {
         return "h:mm A";
       case Constants.MODE_DATE:
         return "MM/DD/YY";
+      case Constants.MODE_MONTH:
+        return "MM/YY";
       default:
         return "MM/DD/YY h:mm A";
     }
@@ -40,7 +42,7 @@ export default class DateTimeField extends Component {
     inputProps: PropTypes.object,
     inputFormat: PropTypes.string,
     defaultText: PropTypes.string,
-    mode: PropTypes.oneOf([Constants.MODE_DATE, Constants.MODE_DATETIME, Constants.MODE_TIME]),
+    mode: PropTypes.oneOf([Constants.MODE_DATE, Constants.MODE_MONTH, Constants.MODE_DATETIME, Constants.MODE_TIME]),
     minDate: PropTypes.object,
     maxDate: PropTypes.object,
     direction: PropTypes.string,
@@ -102,6 +104,21 @@ export default class DateTimeField extends Component {
 
   getValue = () => {
     return moment(this.state.inputValue, this.props.inputFormat, true).format(this.props.format);
+  }
+
+  setSelectedMonth = (e) => {
+    const { target } = e;
+    if (target.className && !target.className.match(/disabled/g)) {
+      return this.setState({
+        selectedDate: this.state.viewDate.clone().month(e.target.innerHTML).date(this.state.selectedDate.date()).hour(this.state.selectedDate.hours()).minute(this.state.selectedDate.minutes())
+      }, function() {
+        this.closePicker();
+        this.props.onChange(this.state.selectedDate.format(this.props.format));
+        return this.setState({
+          inputValue: this.state.selectedDate.format(this.state.inputFormat)
+        });
+      });
+    }
   }
 
   setSelectedDate = (e) => {
@@ -352,6 +369,7 @@ export default class DateTimeField extends Component {
                   mode={this.props.mode}
                   ref="widget"
                   selectedDate={this.state.selectedDate}
+                  setSelectedMonth={this.setSelectedMonth}
                   setSelectedDate={this.setSelectedDate}
                   setSelectedHour={this.setSelectedHour}
                   setSelectedMinute={this.setSelectedMinute}
