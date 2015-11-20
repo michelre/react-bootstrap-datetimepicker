@@ -103,7 +103,7 @@ export default class DateTimePicker extends Component {
 
   render() {
     return (
-      <div className={classnames(this.props.widgetClasses)} style={this.props.widgetStyle}>
+      <div className={classnames('bootstrap-datetimepicker-widget', 'dropdown-menu', this.props.widgetClasses)} style={this.props.widgetStyle}>
 
         <ul className="list-unstyled">
 
@@ -120,4 +120,3 @@ export default class DateTimePicker extends Component {
     );
   }
 }
-

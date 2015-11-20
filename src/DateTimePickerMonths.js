@@ -39,11 +39,11 @@ export default class DateTimePickerMonths extends Component {
           <table className="table-condensed">
             <thead>
               <tr>
-                <th className="prev" onClick={this.props.subtractYear}>‹</th>
+                <th className="prev" onClick={this.props.subtractYear}><span className="glyphicon glyphicon-chevron-left" /></th>
 
                 <th className="switch" colSpan="5" onClick={this.props.showYears}>{this.props.viewDate.year()}</th>
 
-                <th className="next" onClick={this.props.addYear}>›</th>
+                <th className="next" onClick={this.props.addYear}><span className="glyphicon glyphicon-chevron-right" /></th>
               </tr>
             </thead>
 
@@ -57,4 +57,3 @@ export default class DateTimePickerMonths extends Component {
     );
   }
 }
-
