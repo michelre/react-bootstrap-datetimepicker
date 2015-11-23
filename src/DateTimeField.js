@@ -136,7 +136,6 @@ export default class DateTimeField extends Component {
 
   setSelectedDate = (e) => {
     const { target } = e;
-    const value = target == null ? event : event.target.value;
 
     if (target.className && !target.className.match(/disabled/g)) {
       this.setIsValid(true);
