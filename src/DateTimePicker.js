@@ -38,7 +38,8 @@ export default class DateTimePicker extends Component {
     widgetStyle: PropTypes.object,
     togglePicker: PropTypes.func,
     setSelectedHour: PropTypes.func,
-    setSelectedMinute: PropTypes.func
+    setSelectedMinute: PropTypes.func,
+    setToday: PropTypes.func
   }
 
   renderDatePicker = () => {
@@ -96,6 +97,12 @@ export default class DateTimePicker extends Component {
           (
               <li>
                 <span className="btn picker-switch" onClick={this.props.togglePicker} style={{width: "100%"}} ><span className={classnames("glyphicon", this.props.showTimePicker ? "glyphicon-calendar" : "glyphicon-time")} /></span>
+              </li>
+          ) :
+          this.props.mode === Constants.MODE_DATE ?
+          (
+              <li>
+                <span className="btn btn-today" onClick={this.props.setToday} style={{width: "100%"}}>Today</span>
               </li>
           ) :
           null;

@@ -289,6 +289,21 @@ export default class DateTimeField extends Component {
     });
   }
 
+  setToday = () => {
+    var today = moment();
+    this.setIsValid(true);
+    return this.setState({
+      selectedDate: today,
+    }, function() {
+      this.closePicker();
+      this.props.onChange(today);
+      console.log(this.state.selectedDate)
+      return this.setState({
+        inputValue: this.state.selectedDate.format(this.resolvePropsInputFormat())
+      });
+    });
+  }
+
   onClick = () => {
     let classes, gBCR, offset, placePosition, scrollTop, styles, widgetOffsetHeight, clientHeight, height;
     if (this.state.showPicker) {
@@ -397,6 +412,7 @@ export default class DateTimeField extends Component {
                   setSelectedMinute={this.setSelectedMinute}
                   setViewMonth={this.setViewMonth}
                   setViewYear={this.setViewYear}
+                  setToday={this.setToday}
                   showDatePicker={this.state.showDatePicker}
                   showTimePicker={this.state.showTimePicker}
                   showToday={this.props.showToday}
