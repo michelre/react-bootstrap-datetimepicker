@@ -67,7 +67,7 @@ export default class DateTimeField extends Component {
       },
       viewDate: moment(this.props.dateTime, this.props.format, true).startOf("month"),
       selectedDate: moment(this.props.dateTime, this.props.format, true),
-      inputValue: typeof this.props.defaultText !== "undefined" ? this.props.defaultText : moment(this.props.dateTime, this.props.format, true).format(this.resolvePropsInputFormat()),
+      inputValue: typeof this.props.defaultText !== "undefined" ? undefined : moment(this.props.dateTime, this.props.format, true).format(this.resolvePropsInputFormat()),
       isValid: true
   }
 
@@ -413,7 +413,7 @@ export default class DateTimeField extends Component {
                   widgetStyle={this.state.widgetStyle}
             />
             <div className={classnames("input-group date " + this.size(), {"has-error": !this.state.isValid})} ref="datetimepicker">
-              <input className="form-control" onChange={this.onChange} type="text" value={this.state.inputValue} {...this.props.inputProps} ref="inputDateTime"/>
+              <input className="form-control" onChange={this.onChange} type="text" value={this.state.inputValue} {...this.props.inputProps} ref="inputDateTime" placeholder={this.props.defaultText}/>
               <span className="input-group-addon" onBlur={this.onBlur} onClick={this.onClick} ref="dtpbutton">
                 <span className={classnames("glyphicon", this.state.buttonIcon)} />
               </span>
