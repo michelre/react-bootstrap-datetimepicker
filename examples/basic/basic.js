@@ -50,15 +50,15 @@ class Basic extends Component {
                 </pre>
               </div>
             </div>
-              <div className="row">
-                <div className="col-xs-12">
-                  Example with default Text
-                  <DateTimeField
-                    defaultText="Please select a date"
-                  />
-                  <pre> {'<DateTimeField defaultText="Please select a date" />'} </pre>
-                </div>
+            <div className="row">
+              <div className="col-xs-12">
+                Example with default Text
+                <DateTimeField
+                  defaultText="Please select a date"
+                />
+                <pre> {'<DateTimeField defaultText="Please select a date" />'} </pre>
               </div>
+            </div>
             <div className="row">
 							<div className="col-xs-12">
 								Default Basic Example

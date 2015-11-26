@@ -123,7 +123,9 @@ export default class DateTimeField extends Component {
     const { target } = e;
     if (target.className && !target.className.match(/disabled/g)) {
       return this.setState({
-        selectedDate: this.state.viewDate.clone().month(e.target.innerHTML).date(this.state.selectedDate.date()).hour(this.state.selectedDate.hours()).minute(this.state.selectedDate.minutes())
+        selectedDate: moment(this.state.viewDate.clone().toDate())
+          .month(e.target.innerHTML).date(1)
+          .hour(this.state.selectedDate.hours()).minute(this.state.selectedDate.minutes())
       }, function() {
         this.closePicker();
         this.props.onChange(this.state.selectedDate.format(this.props.format));
@@ -144,7 +146,7 @@ export default class DateTimeField extends Component {
       else if (target.className.indexOf("old") >= 0) month = this.state.viewDate.month() - 1;
       else month = this.state.viewDate.month();
       return this.setState({
-        selectedDate: this.state.viewDate.clone().month(month).date(parseInt(e.target.innerHTML)).hour(this.state.selectedDate.hours()).minute(this.state.selectedDate.minutes())
+        selectedDate: moment(this.state.viewDate.clone().toDate()).month(month).date(parseInt(e.target.innerHTML)).hour(this.state.selectedDate.hours()).minute(this.state.selectedDate.minutes())
       }, function() {
         this.closePicker();
         this.props.onChange(this.state.selectedDate.format(this.props.format));
