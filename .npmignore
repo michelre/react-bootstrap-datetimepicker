@@ -6,8 +6,10 @@ test_bundle.js
 test-built
 .idea
 docs
+src
 examples
 bower.json
+dist
 webpack.config.js
 TODO.md
 karma.dev.js
