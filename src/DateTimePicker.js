@@ -17,8 +17,9 @@ export default class DateTimePicker extends Component {
       PropTypes.string,
       PropTypes.number
     ]),
-    mode: PropTypes.oneOf([Constants.MODE_DATE, Constants.MODE_DATETIME, Constants.MODE_TIME]),
+    mode: PropTypes.oneOf([Constants.MODE_DATE, Constants.MODE_MONTH, Constants.MODE_DATETIME, Constants.MODE_TIME]),
     daysOfWeekDisabled: PropTypes.array,
+    setSelectedMonth: PropTypes.func.isRequired,
     setSelectedDate: PropTypes.func.isRequired,
     subtractYear: PropTypes.func.isRequired,
     addYear: PropTypes.func.isRequired,
@@ -37,7 +38,8 @@ export default class DateTimePicker extends Component {
     widgetStyle: PropTypes.object,
     togglePicker: PropTypes.func,
     setSelectedHour: PropTypes.func,
-    setSelectedMinute: PropTypes.func
+    setSelectedMinute: PropTypes.func,
+    setToday: PropTypes.func
   }
 
   renderDatePicker = () => {
@@ -52,6 +54,7 @@ export default class DateTimePicker extends Component {
               maxDate={this.props.maxDate}
               minDate={this.props.minDate}
               selectedDate={this.props.selectedDate}
+              setSelectedMonth={this.props.setSelectedMonth}
               setSelectedDate={this.props.setSelectedDate}
               setViewMonth={this.props.setViewMonth}
               setViewYear={this.props.setViewYear}
@@ -61,6 +64,7 @@ export default class DateTimePicker extends Component {
               subtractYear={this.props.subtractYear}
               viewDate={this.props.viewDate}
               viewMode={this.props.viewMode}
+              mode={this.props.mode}
         />
       </li>
       );
@@ -95,12 +99,18 @@ export default class DateTimePicker extends Component {
                 <span className="btn picker-switch" onClick={this.props.togglePicker} style={{width: "100%"}} ><span className={classnames("glyphicon", this.props.showTimePicker ? "glyphicon-calendar" : "glyphicon-time")} /></span>
               </li>
           ) :
+          this.props.mode === Constants.MODE_DATE ?
+          (
+              <li>
+                <span className="btn btn-today" onClick={this.props.setToday} style={{width: "100%"}}>Today</span>
+              </li>
+          ) :
           null;
   }
 
   render() {
     return (
-      <div className={classnames(this.props.widgetClasses)} style={this.props.widgetStyle}>
+      <div className={classnames('bootstrap-datetimepicker-widget', 'dropdown-menu', this.props.widgetClasses)} style={this.props.widgetStyle}>
 
         <ul className="list-unstyled">
 
@@ -117,4 +127,3 @@ export default class DateTimePicker extends Component {
     );
   }
 }
-

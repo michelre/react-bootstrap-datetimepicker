@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from "react";
 import DateTimePickerDays from "./DateTimePickerDays";
 import DateTimePickerMonths from "./DateTimePickerMonths";
 import DateTimePickerYears from "./DateTimePickerYears";
+import Constants from "./Constants.js";
 
 export default class DateTimePickerDate extends Component {
   static propTypes = {
@@ -14,7 +15,9 @@ export default class DateTimePickerDate extends Component {
       PropTypes.string,
       PropTypes.number
     ]),
+    mode: PropTypes.oneOf([Constants.MODE_DATE, Constants.MODE_MONTH, Constants.MODE_DATETIME]),
     daysOfWeekDisabled: PropTypes.array,
+    setSelectedMonth: PropTypes.func.isRequired,
     setSelectedDate: PropTypes.func.isRequired,
     subtractYear: PropTypes.func.isRequired,
     addYear: PropTypes.func.isRequired,
@@ -46,6 +49,9 @@ export default class DateTimePickerDate extends Component {
       }
     };
     this.state = viewModes[this.props.viewMode] || viewModes[Object.keys(viewModes)[this.props.viewMode]] || viewModes.days;
+    if (this.state.daysDisplayed && this.props.mode === Constants.MODE_MONTH) {
+      this.state = viewModes.months;
+    }
   }
 
   showMonths = () => {
@@ -105,10 +111,12 @@ export default class DateTimePickerDate extends Component {
       <DateTimePickerMonths
             addYear={this.props.addYear}
             selectedDate={this.props.selectedDate}
+            setSelectedMonth={this.props.setSelectedMonth}
             setViewMonth={this.setViewMonth}
             showYears={this.showYears}
             subtractYear={this.props.subtractYear}
             viewDate={this.props.viewDate}
+            mode={this.props.mode}
       />
       );
     } else {
