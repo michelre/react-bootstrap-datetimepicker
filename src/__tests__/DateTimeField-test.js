@@ -67,9 +67,9 @@ describe("DateTimeField", function() {
     it("doesn't change the defaultText if dateTime didn't change", function() {
       const Parent = createParent({defaultText: "Pick a date"});
       const input = TestUtils.findRenderedDOMComponentWithTag(Parent, "input");
-      expect(input.getAttribute('placeholder')).toBe("Pick a date");
+      expect(input.value).toBe("Pick a date");
       Parent.setState({});
-      expect(input.getAttribute('placeholder')).toBe("Pick a date");
+      expect(input.value).toBe("Pick a date");
     });
 
 
