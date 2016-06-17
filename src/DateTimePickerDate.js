@@ -117,6 +117,8 @@ export default class DateTimePickerDate extends Component {
             subtractYear={this.props.subtractYear}
             viewDate={this.props.viewDate}
             mode={this.props.mode}
+            minDate={this.props.minDate}
+            maxDate={this.props.maxDate}
       />
       );
     } else {

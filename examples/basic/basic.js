@@ -129,8 +129,10 @@ class Basic extends Component {
                 just month picker
                 <DateTimeField
                   mode="month"
+                  minDate={moment('2015-07', 'YYYY-MM')}
+                  maxDate={moment('2016-11', 'YYYY-MM')}
                 />
-                <pre> {'<DateTimeField mode="month" />'} </pre>
+                <pre> {'<DateTimeField mode="month" minDate={moment("2015-07", "YYYY-MM")} maxDate={moment("2016-11", "YYYY-MM")} />'} </pre>
               </div>
             </div>
           </div>
